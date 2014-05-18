@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>test</title>
+		<script src="includes/jquery-1.7.1.min.js" type="text/javascript"></script>
+		<script src="includes/jquery-1.7.1.js" type="text/javascript"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function () {
+			$(function() {
+
+
+    var $test = $('#test');
+    var initText = $.trim($test.text()), ptr = 0;
+    var timer = setInterval(function() {
+        var ln = $.trim($test.find('.trans').text().length);
+        if (ln == initText.length) {
+            $test.empty();
+            clearInterval(timer);
+        }
+
+        $('#test').html(function() {    
+
+            return $('<span>').addClass('removeMe')
+                .html(initText.substring(ptr++ , ptr))
+                .before($('<span>').addClass('trans').
+                       html(initText.substring(0 , ptr-1)))
+                .after(initText.substring(ptr));
+        }).find('span.removeMe').animate({'opacity': 0}, 200);}, 300);
+				});
+			});
+		</script>
+		<style type="text/css">
+			.trans{ 
+				opacity: 0;
+				filter: alpha(opacity 0);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">
+   			This is a test page to demonstrate text disapper letter by letter
+		</div>
+	</body>
+</html>
